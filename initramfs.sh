@@ -32,10 +32,6 @@ cp -R /etc/terminfo etc/
 cp -R /lib/terminfo lib/
 cp -R /usr/share/terminfo usr/share
 
-# Add console devices
-sudo mknod -m 622 dev/console c 5 1
-sudo mknod -m 622 dev/tty0 c 4 0
-
 # Build /init script
 cat >init <<-EOF
 	#!/bin/busybox sh
@@ -51,6 +47,13 @@ cat >init <<-EOF
 	EOF
 chmod +x init
 
-# Make the initramfs image
-find . | cpio -H newc -o > ../initramfs.cpio
+fakeroot -- /bin/bash -c '
+    # Add console devices
+    mknod -m 622 dev/console c 5 1;
+    mknod -m 622 dev/tty0 c 4 0;
+
+    # Make the initramfs image
+    find . | cpio -H newc -o > ../initramfs.cpio;
+'
+
 popd > /dev/null
