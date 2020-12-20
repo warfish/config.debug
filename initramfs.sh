@@ -51,6 +51,7 @@ fakeroot -- /bin/bash -c '
     # Add console devices
     mknod -m 622 dev/console c 5 1;
     mknod -m 622 dev/tty0 c 4 0;
+    mknod -m 622 dev/kvm c 10 232;
 
     # Make the initramfs image
     find . | cpio -H newc -o > ../initramfs.cpio;
