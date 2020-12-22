@@ -36,20 +36,21 @@ done
 cat >init <<-EOF
 	#!/bin/sh
 
-	mount -t proc proc /proc
-	mount -t sysfs sysfs /sys
-	mount -t debugfs debugfs /sys/kernel/debug
-	mount -t tracefs tracefs /sys/kernel/debug/tracing
+	mount -t proc none /proc
+	mount -t sysfs none /sys
+	mount -t devtmpfs none /dev
+	mount -t debugfs none /sys/kernel/debug
+	mount -t tracefs none /sys/kernel/debug/tracing
 
 	exec /bin/bash -i
 	EOF
 chmod +x init
 
+# Prepare fakeroot script and run it
 fakeroot -- /bin/bash -c '
-    # Add console devices
+    # Add device for early console
+    # will be overlayed by devtmpfs, but needed before we can mount it
     mknod -m 622 dev/console c 5 1;
-    mknod -m 622 dev/tty0 c 4 0;
-    mknod -m 622 dev/kvm c 10 232;
 
     # Make the initramfs image
     find . | cpio -H newc -o > ../initramfs.cpio;
