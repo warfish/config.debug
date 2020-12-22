@@ -10,10 +10,15 @@ pushd $INITRAMFS_ROOT > /dev/null
 
 ln -s lib lib64
 
-# Copy busybox
+# Install busybox
 [ -f "$BUSYBOX_PATH" ] || { echo Busybox is not installed; exit -1; }
 cp $BUSYBOX_PATH bin/
 chmod +x bin/busybox
+
+for b in `busybox --list`; do
+	# Symlink is explicitly relative
+	ln -s busybox bin/$b
+done
 
 # Copy external non-static binaries
 DYNBINS="bash lspci lscpu lstopo numactl htop strace"
@@ -34,9 +39,7 @@ cp -R /usr/share/terminfo usr/share
 
 # Build /init script
 cat >init <<-EOF
-	#!/bin/busybox sh
-
-	/bin/busybox --install -s
+	#!/bin/sh
 
 	mount -t proc proc /proc
 	mount -t sysfs sysfs /sys
