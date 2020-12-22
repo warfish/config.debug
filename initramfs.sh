@@ -42,6 +42,8 @@ cat >init <<-EOF
 	mount -t debugfs none /sys/kernel/debug
 	mount -t tracefs none /sys/kernel/debug/tracing
 
+	echo "0" > /proc/sys/kernel/printk
+
 	exec /bin/bash -i
 	EOF
 chmod +x init
