@@ -32,6 +32,20 @@ for b in $DYNBINS; do
 	done
 done
 
+# Copy terminfo db for selected terminals
+TERMS="linux vt100"
+mkdir -p etc/terminfo
+for term in $TERMS; do
+	for path in $(infocmp -D); do
+		tinfo="$(find $path -name $term)"
+		if [ ! -z $tinfo ]; then
+			opath=$(dirname etc/terminfo/${tinfo#/*/*/})
+			mkdir -p $opath && cp $tinfo $opath
+			break
+		fi
+	done
+done
+
 # Build /init script
 cat >init <<-EOF
 	#!/bin/sh
