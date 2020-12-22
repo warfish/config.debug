@@ -32,11 +32,6 @@ for b in $DYNBINS; do
 	done
 done
 
-# terminfo
-cp -R /etc/terminfo etc/
-cp -R /lib/terminfo lib/
-cp -R /usr/share/terminfo usr/share
-
 # Build /init script
 cat >init <<-EOF
 	#!/bin/sh
