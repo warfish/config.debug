@@ -58,7 +58,7 @@ cat >init <<-EOF
 
 	echo "0" > /proc/sys/kernel/printk
 
-	exec /bin/bash -i
+	PS1="# " exec /bin/getty -l /bin/bash -n 115200 /dev/ttyS0
 	EOF
 chmod +x init
 
