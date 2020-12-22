@@ -5,7 +5,7 @@ BUSYBOX_PATH=$(realpath ${BUSYBOX_PATH:-/bin/busybox})
 
 [ -d $INITRAMFS_ROOT ] && rm -rf $INITRAMFS_ROOT
 
-mkdir -p $INITRAMFS_ROOT/{bin,dev,etc,lib,proc,root,sbin,sys,/usr/bin,/usr/sbin,/usr/share} 
+mkdir -p $INITRAMFS_ROOT/{bin,dev,etc,lib,proc,root,sbin,sys,usr/bin,usr/sbin,usr/share}
 pushd $INITRAMFS_ROOT > /dev/null
 
 ln -s lib lib64
