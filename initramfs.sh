@@ -39,7 +39,7 @@ for term in $TERMS; do
 	for path in $(infocmp -D); do
 		tinfo="$(find $path -name $term)"
 		if [ ! -z $tinfo ]; then
-			opath=$(dirname etc/terminfo/${tinfo#/*/*/})
+			opath=$(dirname etc/terminfo/${tinfo#*/terminfo/})
 			mkdir -p $opath && cp $tinfo $opath
 			break
 		fi
