@@ -58,6 +58,8 @@ cat >init <<-EOF
 
 	echo "0" > /proc/sys/kernel/printk
 
+	mkdir -p /mnt/shared && mount -t 9p sharedfs_mount /mnt/shared -oversion=9p2000.L,posixacl
+
 	PS1="# " exec /bin/getty -l /bin/bash -n 115200 /dev/ttyS0
 	EOF
 chmod +x init

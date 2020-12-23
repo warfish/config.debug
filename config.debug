@@ -807,7 +807,7 @@ CONFIG_NET=y
 # CONFIG_PACKET is not set
 # CONFIG_UNIX is not set
 # CONFIG_XDP_SOCKETS is not set
-# CONFIG_INET is not set
+CONFIG_INET=y
 # CONFIG_NETWORK_SECMARK is not set
 # CONFIG_NETWORK_PHY_TIMESTAMPING is not set
 # CONFIG_NETFILTER is not set
@@ -851,7 +851,9 @@ CONFIG_NET=y
 # CONFIG_WIRELESS is not set
 # CONFIG_WIMAX is not set
 # CONFIG_RFKILL is not set
-# CONFIG_NET_9P is not set
+CONFIG_NET_9P=y
+CONFIG_NET_9P_VIRTIO=y
+# CONFIG_NET_9P_DEBUG is not set
 # CONFIG_CAIF is not set
 # CONFIG_NFC is not set
 # CONFIG_PSAMPLE is not set
@@ -1726,6 +1728,8 @@ CONFIG_INOTIFY_USER=y
 # CONFIG_AUTOFS_FS is not set
 # CONFIG_FUSE_FS is not set
 # CONFIG_OVERLAY_FS is not set
+CONFIG_9P_FS=y
+CONFIG_9P_FS_POSIX_ACL=y
 
 #
 # Caches
