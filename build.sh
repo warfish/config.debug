@@ -2,7 +2,7 @@
 
 set -e
 
-CONFIG=${CONFIG:-config.debug}
+CONFIG=${CONFIG:-5.9.debug}
 BINDIR=$(realpath ${BINDIR:-./build})
 
 [ ! -d $BINDIR ] && mkdir $BINDIR > /dev/null
